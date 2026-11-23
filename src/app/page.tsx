@@ -1,69 +1,61 @@
-import Image from "next/image";
+import { ArrowRight, CalendarDays, Check, Scissors, TrendingUp, Users } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="landing-shell">
+      <nav className="landing-nav">
+        <Link href="/" className="brand" aria-label="Navalha início">
+          <span className="brand-mark"><Scissors size={18} /></span>
+          <span>navalha</span>
+        </Link>
+        <div className="landing-links">
+          <a href="#recursos">Recursos</a>
+          <a href="#planos">Planos</a>
+          <Link className="login-link" href="/entrar/cliente">Área do cliente</Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </nav>
+
+      <section className="hero">
+        <div className="hero-copy">
+          <div className="eyebrow"><span /> Gestão inteligente para barbearias</div>
+          <h1>Mais clientes.<br /><em>Mais controle.</em></h1>
+          <p>Agenda, equipe, financeiro e relacionamento com clientes em uma única plataforma criada para crescer com seu negócio.</p>
+          <div className="hero-actions">
+            <Link href="/entrar/admin" className="primary-button">Área do barbeiro <ArrowRight size={17} /></Link>
+            <a href="#recursos" className="secondary-button">Conhecer recursos</a>
+          </div>
+          <div className="hero-proof">
+            <span><Check size={14} /> 14 dias grátis</span>
+            <span><Check size={14} /> Sem cartão</span>
+          </div>
         </div>
-      </main>
-    </div>
+
+        <div className="hero-visual" aria-label="Prévia do painel Navalha">
+          <div className="preview-card">
+            <div className="preview-top"><span className="mini-logo"><Scissors size={15} /></span><b>Visão geral</b><div className="preview-avatar">MS</div></div>
+            <div className="preview-stats">
+              <div><span>Receita</span><strong>R$ 8.420</strong><small>+18% este mês</small></div>
+              <div><span>Atendimentos</span><strong>124</strong><small>+12 esta semana</small></div>
+            </div>
+            <div className="preview-chart">
+              {[42,58,51,74,67,88,78,94,72,83,96,89].map((height, index) => <i key={index} style={{ height: `${height}%` }} />)}
+            </div>
+            <div className="preview-agenda">
+              <div className="agenda-head"><b>Próximos agendamentos</b><span>Hoje</span></div>
+              <div className="appointment"><b className="time">09:30</b><div><strong>Lucas Mendes</strong><small>Corte + Barba</small></div><span className="status">Confirmado</span></div>
+              <div className="appointment"><b className="time">10:15</b><div><strong>Pedro Henrique</strong><small>Corte degradê</small></div><span className="status neutral">Aguardando</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="feature-strip" id="recursos">
+        <div><CalendarDays /><span><b>Agenda inteligente</b><small>Otimize horários e profissionais</small></span></div>
+        <div><Users /><span><b>Base de clientes</b><small>Histórico e preferências</small></span></div>
+        <div><TrendingUp /><span><b>Controle financeiro</b><small>Receitas e comissões</small></span></div>
+      </section>
+      <section className="landing-access" id="planos"><div><span className="eyebrow"><span /> ACESSO SEPARADO</span><h2>Gestão e atendimento,<br/>cada um no seu espaço.</h2><p>A equipe administra agenda, serviços e financeiro. Seus clientes entram em uma área própria para escolher serviços e pedir horários.</p></div><div className="access-actions"><Link href="/cadastro/barbearia" className="primary-button">Cadastrar minha barbearia <ArrowRight size={16}/></Link><Link href="/entrar/admin" className="secondary-button">Entrar como barbeiro</Link><Link href="/entrar/cliente" className="secondary-button">Acessar como cliente</Link></div></section>
+    </main>
   );
 }
